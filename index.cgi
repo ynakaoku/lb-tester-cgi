@@ -4,6 +4,7 @@ import socket
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 ip = s.getsockname()[0]
+h = socket.gethostname()
 color_seed = int(ip.split('.')[3]) % 5
 if color_seed is 0:
     color = '#FFA0A0'  # red
@@ -27,7 +28,8 @@ print("</head>")
 print("<body>")
 print("    <h1>NSX Solution Test Page")
 print("    <div style=\"background-color:%s;\">" % color)
-print("        <h1>Server IP address: %s</h1>" % ip)
+print("        <h2>IP address: %s</h2>" % ip)
+print("        <h2>Hostname: %s</h2>" % h)
 print("    </div>")
 print("</body>")
 print("</html>")
