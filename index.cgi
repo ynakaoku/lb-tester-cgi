@@ -5,7 +5,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 ip = s.getsockname()[0]
 h = socket.gethostname()
-color_seed = int(ip.split('.')[3]) % 5
+color_seed = int(ip.split('.')[3]) % 6
 if color_seed is 0:
     color = '#FFA0A0'  # red
 if color_seed is 1:
@@ -13,8 +13,10 @@ if color_seed is 1:
 if color_seed is 2:
     color = '#A0FFA0'  # green
 if color_seed is 3:
-    color = '#A0A0FF'  # blue
+    color = '#A0FFFF'  # bluegreen
 if color_seed is 4:
+    color = '#A0A0FF'  # blue
+if color_seed is 5:
     color = '#FFA0FF'  # purple
 
 print("Content-Type: text/html;")
