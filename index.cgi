@@ -2,7 +2,6 @@
 import socket
 import cgi
 from json import dumps
-from http.client import HTTPException
 
 # Get Socket to investigate Pod address and hostname
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -12,21 +11,23 @@ h = socket.gethostname()
 
 # Check if Get query type is HTML or JSON
 form = cgi.FieldStorage()
-print(form)
-if "query" not in form or form["query"].value is "html":
+
+query = form.getvalue("query")
+
+if "query" not in form or query == "html":
 
     color_seed = int(ip.split('.')[3]) % 6
-    if color_seed is 0:
+    if color_seed == 0:
         color = '#FFA0A0'  # red
-    if color_seed is 1:
+    if color_seed == 1:
         color = '#FFFFA0'  # yellow
-    if color_seed is 2:
+    if color_seed == 2:
         color = '#A0FFA0'  # green
-    if color_seed is 3:
+    if color_seed == 3:
         color = '#A0FFFF'  # bluegreen
-    if color_seed is 4:
+    if color_seed == 4:
         color = '#A0A0FF'  # blue
-    if color_seed is 5:
+    if color_seed == 5:
         color = '#FFA0FF'  # purple
     
     print("Content-Type: text/html;")
@@ -46,9 +47,11 @@ if "query" not in form or form["query"].value is "html":
     print("</body>")
     print("</html>")
 
-elif form["query"].value is "json":
+elif query == "json":
     res = {"name":"NSX Solution Demo/Test Page", "address":ip, "hostname":h}
-    print(dumps(res))
+    print("Content-Type: text/json;")
+    print("")
+    print(dumps(res, indent=2, ensure_ascii=False))
 
 else:
-    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Parameter:query")
+    raise Exception("Invalid Parameter: query=" + query)
