@@ -2,6 +2,7 @@
 import socket
 import cgi
 from json import dumps
+from http.client import HTTPException
 
 # Get Socket to investigate Pod address and hostname
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -11,6 +12,7 @@ h = socket.gethostname()
 
 # Check if Get query type is HTML or JSON
 form = cgi.FieldStorage()
+print(form)
 if "query" not in form or form["query"].value is "html":
 
     color_seed = int(ip.split('.')[3]) % 6
