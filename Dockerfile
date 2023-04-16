@@ -2,7 +2,7 @@
 FROM httpd:2.4
 
 RUN apt-get -y update && apt-get -y install wget unzip iputils-ping
-RUN wget https://raw.githubusercontent.com/ynakaoku/lb-tester-cgi/0.1.0/index.cgi
+RUN wget https://raw.githubusercontent.com/ynakaoku/lb-tester-cgi/main/index.cgi
 # RUN wget https://github.com/meso-cacase/difff/archive/ver6.0-stable.zip
 # RUN unzip ver6.0-stable
 # RUN rm -f /usr/local/apache2/htdocs/index.html
